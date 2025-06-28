@@ -29,5 +29,3 @@ resultado = asignacao(alunos, projetos, participantes_projeto)
 print("Pares estáveis:")
 for aluno, projeto in resultado.items():
     print(f"{aluno} - {projeto}")
-
-print("teste") #teste
