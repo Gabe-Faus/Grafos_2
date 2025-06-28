@@ -30,4 +30,4 @@ print("Pares estáveis:")
 for aluno, projeto in resultado.items():
     print(f"{aluno} - {projeto}")
 
-print("teste")
+print("teste") #teste
