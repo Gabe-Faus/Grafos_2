@@ -59,14 +59,27 @@ for estados in resultado[1]:
     print()
 
 G = nx.DiGraph()
+projetos_cor = set()
+alunos_cor = set()
+
 print("PARES FINAIS:")
 for projeto, alunos in resultado[0].items():
     print(f"{projeto} - {alunos}")
+    projetos_cor.add(projeto)
     for aluno in alunos:
+        alunos_cor.add(aluno)
         G.add_edge(projeto, aluno)
 
 pos = nx.spring_layout(G)
-nx.draw(G, pos, with_labels=True, node_color='lightblue', node_size=1500, font_size=10)
+
+node_colors = []
+for node in G.nodes():
+    if node in projetos_cor:
+        node_colors.append('grey')  
+    else:
+        node_colors.append('skyblue')     
+
+nx.draw(G, pos, with_labels=True, node_color=node_colors, node_size=1000, font_size=10) 
 plt.show()
 
     
