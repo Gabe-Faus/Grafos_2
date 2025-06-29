@@ -1,5 +1,7 @@
 from proj_alum import alunos, projetos, participantes_projeto
 from collections import defaultdict #Para manipular dicionarios de forma mais tranquila
+import networkx as nx #Para fazer os grafos
+import matplotlib.pyplot as plt #Para visualização
 
 """Aqui usaremos o Gale-Shapley eu decidi usar como se os alunos fossem os homens que pedem as mãos das mulheres, e elas serem os projetos pq faz mais sentindo na lógica que alunos podem escolher mais de um projeto. Esse algoritmo é uma base, eh preciso que sejam selecionados o sprojeto e ver se a nota dos alunos é sulficiente e se ha vagas. Mas esse algoritmo faz uma seleção. Poemos construir o resto a partir dele."""
 
@@ -52,11 +54,19 @@ cont_it = 0
 for estados in resultado[1]:
     cont_it +=1
     print(f"ITERAÇÃO {cont_it}")
-    for  aluno, projeto in estados.items():
-        print(f"{aluno} - {projeto}")
+    for  projeto, alunos in estados.items():
+        print(f"{projeto} - {alunos}")
     print()
 
+G = nx.DiGraph()
 print("PARES FINAIS:")
-for aluno, projeto in resultado[0].items():
-    print(f"{aluno} - {projeto}")
+for projeto, alunos in resultado[0].items():
+    print(f"{projeto} - {alunos}")
+    for aluno in alunos:
+        G.add_edge(projeto, aluno)
+
+pos = nx.spring_layout(G)
+nx.draw(G, pos, with_labels=True, node_color='lightblue', node_size=1500, font_size=10)
+plt.show()
+
     
